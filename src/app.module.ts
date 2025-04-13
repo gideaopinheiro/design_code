@@ -1,10 +1,28 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { PagamentosModule } from './pagamentos/pagamentos.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { FaturaModel } from './pagamentos/models/fatura.model';
+import { PagamentoModel } from './pagamentos/models/pagamento.model';
+import { UsuarioModel } from './pagamentos/models/usuario.model';
+import { ItemFaturaModel } from './pagamentos/models/item-fatura.model';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      username: 'root',
+      password: 'senha',
+      database: 'design_code',
+      synchronize: true,
+      autoLoadEntities: true,
+      entities: [FaturaModel, PagamentoModel, UsuarioModel, ItemFaturaModel],
+    }),
+    PagamentosModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
