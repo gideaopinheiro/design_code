@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PagamentoModel } from '../models/pagamento.model';
 import { UsuarioModel } from '../models/usuario.model';
@@ -31,12 +31,7 @@ export class PagamentosRepository {
 
   async buscarPagamentoPorId(id: string): Promise<Pagamento> {
     const pagamento = await this.pagamentosRepository.findOneBy({ id });
-    console.log('pagamento: ', pagamento);
-    console.log('\n\n');
+    throw new BadRequestException();
     return Pagamento.criar(pagamento);
-  }
-
-  private toPagamento(pagamentoModel: PagamentoModel) {
-    // TODO: implementar o criarAPartirDe()
   }
 }
