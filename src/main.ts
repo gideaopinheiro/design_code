@@ -1,3 +1,6 @@
+import { instrumentTelemetry } from './telemetry/open-telemetry';
+instrumentTelemetry();
+
 import Bugsnag from '@bugsnag/js';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';

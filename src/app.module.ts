@@ -12,7 +12,7 @@ import { ItemFaturaModel } from './pagamentos/models/item-fatura.model';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'demo_mysql-db_1',
       username: 'root',
       password: 'senha',
       database: 'design_code',

@@ -1,0 +1,33 @@
+services:
+  otel-collector:
+    container_name: otel-collector
+    image: otel/opentelemetry-collector-contrib
+    ports:
+      - '4317:4317'
+      - '4318:4318'
+      - '55680:55680'
+      - '8889:8889'
+    volumes:
+      - './otel-collector-config.yaml:/etc/otel-collector-config.yaml'
+    command:
+      - '--config=/etc/otel-collector-config.yaml'
+    networks:
+      - demo_default
+  design_code_app:
+     container_name: design_code_app
+     build:
+      context: .
+      dockerfile: Dockerfile
+     environment:
+      PORT: 3000
+     ports:
+      - '3000:3000'
+     networks:
+      - demo_default
+
+
+networks:
+  demo_default:
+    driver: bridge
+    external: true
+    name: demo_default
