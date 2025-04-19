@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { ItemFatura, ItemFaturaProps } from './item-fatura';
 import { randomUUID } from 'crypto';
 
@@ -85,8 +86,9 @@ export class Fatura {
   }
 
   private static dataPagamentoAPartirDeHoje(dataPagamento: Date): boolean {
-    const today = new Date();
-    return dataPagamento >= today;
+    const today = moment().startOf('day');
+    const dataPagamentoNoTime = moment(dataPagamento).startOf('day');
+    return dataPagamentoNoTime.isSameOrAfter(today);
   }
 
   private static valoresEstaoEmCentavos(
