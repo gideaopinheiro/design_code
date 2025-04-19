@@ -31,7 +31,6 @@ export class PagamentosRepository {
 
   async buscarPagamentoPorId(id: string): Promise<Pagamento> {
     const pagamento = await this.pagamentosRepository.findOneBy({ id });
-    throw new BadRequestException();
     return Pagamento.criar(pagamento);
   }
 }
